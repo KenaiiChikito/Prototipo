@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 69410577}
   - component: {fileID: 69410576}
   - component: {fileID: 69410575}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Pistola
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,6 +279,10 @@ MonoBehaviour:
   "da\xF1o": 25
   alcance: 50
   puntoDisparo: {fileID: 1497743876}
+  tiempoEntreDisparos: 0.5
+  capasAIgnorar:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!65 &69410576
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -671,12 +675,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4b1c580d3b831f07b95c948cb1a9c25, type: 3}
+  m_Script: {fileID: 11500000, guid: a69c107154f6cd0b88f41feb7e16bb1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 532868227}
-  offset: {x: 0, y: 10, z: -5}
-  smoothTime: 0.125
+  objetivo: {fileID: 532868227}
+  distancia: {x: 0, y: 10, z: -7}
+  suavidad: 0.125
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,9 +958,8 @@ GameObject:
   - component: {fileID: 532868231}
   - component: {fileID: 532868230}
   - component: {fileID: 532868229}
-  - component: {fileID: 532868235}
-  - component: {fileID: 532868234}
   - component: {fileID: 532868233}
+  - component: {fileID: 532868234}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1108,25 +1111,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 532868226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a93c098819eeed1ac1c09785f0561a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &532868235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532868226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73b55399bb7c9a31b8c4c24b2eff2bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSmoothTime: 0.1
-  speed: 6
-  rotationVelocity: 500
+  speed: 50
   lookAt: 2
+  suavidadGiro: 2
 --- !u!1 &539085324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,7 +1761,7 @@ Transform:
   m_GameObject: {fileID: 1497743875}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.55}
+  m_LocalPosition: {x: 0, y: 0, z: 0.639}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

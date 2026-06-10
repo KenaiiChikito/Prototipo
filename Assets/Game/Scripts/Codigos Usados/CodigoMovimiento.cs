@@ -1,148 +1,98 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public enum MirarMouse
-{
-    CameraDirection,
-    MovingDirection,
-    MousePosition, // <-- Nuevo estado
-}
+public enum MirarMouse { CameraDirection, MovingDirection, MousePosition }
 
 public class CodigoMovimiento : MonoBehaviour
 {
-
-    //Funciones de camara para que este mas clean
-
-    public float rotationSmoothTime = 0.1f; // Tiempo para suavizar la rotación
-    private float currentRotationVelocity; // Velocidad actual de rotación (usada por SmoothDampAngle)
-    
     private Camera cam;
-    //private Animator animator;
     private Rigidbody rb;
+    
+    [Header("Ajustes de Movimiento")]
     public float speed = 6f;
-    private Vector3 smoothDirection = Vector3.zero;
-    private float tValue = 6f; //animation transition value
-    public float rotationVelocity = 500f;
+    public MirarMouse lookAt = MirarMouse.MousePosition;
+
+    [Header("Ajustes de Rotación")]
+    [Range(1f, 20f)]
+    public float suavidadGiro = 10f; // Menos es más lento/suave. Prueba con 5 o 7.
+
     private Vector3 direction;
-    public MirarMouse lookAt;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
         cam = Camera.main;
-        
-        // Actualizacion para recordar que hice: Para ver el mouse, usamos Confined o None
+        ConfigurarCursor();
+    }
+
+    void ConfigurarCursor()
+    {
         if (lookAt == MirarMouse.MousePosition) {
-            Cursor.lockState = CursorLockMode.Confined; // Se ve el mouse pero no sale de la ventana
-            Cursor.visible = false; // Asegura que el cursor sea visible
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false; 
         } else {
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false; // El cursor no se ve 
+            Cursor.visible = false;
         }
     }
 
     void Update()
     {
-        float haxis = Input.GetAxisRaw("Horizontal");
-        float vaxis = Input.GetAxisRaw("Vertical");
-
-        //Presionar ESC para mostar el mouse y liberar el bloqueo de este mismo
+        // Liberar mouse con ESC
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-  
-        }
-        //Si se hace click en la pantalla vuelve a bloquear el mouse y ocultarse
-        if (Input.GetMouseButtonDown(0) && lookAt == MirarMouse.MousePosition)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
         }
 
+        float haxis = Input.GetAxisRaw("Horizontal");
+        float vaxis = Input.GetAxisRaw("Vertical");
 
-        
-        // El movimiento sigue dependiendo de la cámara
+        // Calculamos dirección relativa a la cámara
         direction = cam.transform.rotation * new Vector3(haxis, 0, vaxis);
         direction.y = 0;
 
-        // Movimiento
-        rb.linearVelocity = new Vector3(direction.x, 0, direction.z).normalized * speed + new Vector3(0, rb.linearVelocity.y, 0);
+        // Movimiento por Rigidbody
+        rb.linearVelocity = new Vector3(direction.x * speed, rb.linearVelocity.y, direction.z * speed);
 
-        if (Input.GetMouseButtonDown(0))
-            //animator.SetTrigger("Attack");
-
-        //animator.SetBool("Defend", Input.GetMouseButton(1));
-
-        // LÓGICA DE ROTACIÓN SEGÚN EL MODO
-        if (lookAt == MirarMouse.CameraDirection)
+        // Lógica de Rotación
+        if (lookAt == MirarMouse.MousePosition)
         {
-            smoothDirection = Vector3.MoveTowards(smoothDirection, new Vector3(haxis, 0, vaxis), Time.deltaTime * tValue);
-            ChangeDirection(cam.transform.forward);
+            ProcesarMirarAlMouse();
         }
-        else if (lookAt == MirarMouse.MovingDirection)
+        else
         {
-            smoothDirection = Vector3.MoveTowards(smoothDirection, new Vector3(0, 0, direction.magnitude), Time.deltaTime * tValue);
-            ChangeDirection(direction);
+            // Para los otros modos usamos la dirección de movimiento
+            if (direction.magnitude > 0.1f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * suavidadGiro);
+            }
         }
-        else if (lookAt == MirarMouse.MousePosition)
-        {
-            // En este modo, el cilindro siempre mira al mouse
-            MirarAlMouse();
-            
-            // Para la animación: calculamos la dirección relativa a donde mira el personaje
-            // Esto permite que camine de lado o hacia atrás si el mouse está en otra dirección
-            Vector3 relativeDir = transform.InverseTransformDirection(direction);
-            smoothDirection = Vector3.MoveTowards(smoothDirection, relativeDir, Time.deltaTime * tValue);
-        }
-
-        //animator.SetFloat("ejeX", smoothDirection.x);
-        //animator.SetFloat("ejeZ", smoothDirection.z);
     }
 
-    void MirarAlMouse()
+    void ProcesarMirarAlMouse()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, transform.position); // Plano a la altura del jugador
+        Plane groundPlane = new Plane(Vector3.up, transform.position); 
         float rayDistance;
 
         if (groundPlane.Raycast(ray, out rayDistance))
         {
             Vector3 pointToLook = ray.GetPoint(rayDistance);
             Vector3 lookDir = pointToLook - transform.position;
-            lookDir.y = 0; // Evita que el cilindro se incline
+            lookDir.y = 0; 
 
-            if (lookDir.magnitude > 0.5f) // Solo rota si el mouse está a una distancia mínima para evitar jitter
+            // Solo rotar si el mouse no está exactamente encima del jugador
+            if (lookDir.magnitude > 0.5f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(lookDir);
-                // Usamos la misma velocidad de rotación que definiste
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+                // SLERP es la clave para que no sea brusco
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * suavidadGiro);
             }
         }
-    }
-
-    void ChangeDirection(Vector3 directionToLook)
-    {
-        // Solo rota si hay movimiento (para Camera o Moving direction)
-        if (direction.magnitude > 0)
-        {
-            directionToLook.y = 0;
-            Quaternion targetRotation = Quaternion.LookRotation(directionToLook);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * rotationVelocity);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        float currentMovSpeed = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
-        currentMovSpeed = Mathf.Clamp(currentMovSpeed, 0, speed);
-
-        if (direction.magnitude > 0.5f)
-            rb.linearVelocity = new Vector3(direction.x, 0, direction.z).normalized * currentMovSpeed + new Vector3(0, rb.linearVelocity.y, 0);
     }
 }
