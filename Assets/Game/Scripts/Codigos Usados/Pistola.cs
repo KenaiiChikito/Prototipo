@@ -24,6 +24,13 @@ public class Pistola : MonoBehaviour
 
     void Disparar()
     {
+        GameObject nuevaBala = Instantiate(balaPrefab, puntoDisparo.position, puntoDisparo.rotation);
+        Bala scriptBala = nuevaBala.GetComponent<Bala>();
+        if (scriptBala != null)
+        {
+            scriptBala.damage = daño; // Asegura que la bala tenga el daño correcto
+            scriptBala.alcance = alcance; // Asegura que la bala tenga el alcance correcto
+        }
         // El Raycast ahora ignora la capa del Jugador
         RaycastHit hit;
         Vector3 direction = puntoDisparo.forward;

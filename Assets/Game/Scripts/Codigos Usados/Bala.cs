@@ -5,6 +5,7 @@ public class Bala : MonoBehaviour
     public float speed = 20f;
     public float damage = 10f;
     public float lifeTime = 3f;
+    public float alcance = 50f; // Agregado para que la bala tenga un alcance definido
 
     private void Start()
     {
