@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Pistola : MonoBehaviour
 {
+    public GameObject balaPrefab; // Prefab de la bala que se instanciará al disparar
     public float daño = 25f; // Cantidad de daño que la pistola inflige
     public float alcance = 50f; // Alcance máximo de la pistola
     public Transform puntoDisparo; // Punto desde donde se dispara el rayo
@@ -19,6 +20,9 @@ public class Pistola : MonoBehaviour
 
     void Disparar()
     {
+        //Crea una bala instanciando el prefab en el punto de disparo
+        Instantiate(balaPrefab, puntoDisparo.position, puntoDisparo.rotation);
+        
         // Crea un rayo desde el punto de disparo hacia adelante
         Debug.DrawRay(puntoDisparo.position, puntoDisparo.forward * alcance, Color.red, 1f); // Dibuja el rayo para debug
 

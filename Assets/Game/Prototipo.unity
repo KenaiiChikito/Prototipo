@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703c21a581c30ced9b6e4685db69e426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  balaPrefab: {fileID: 2807304450733185288, guid: c314c68f898634a1c9dd3a7bf09552ac, type: 3}
   "da\xF1o": 25
   alcance: 50
   puntoDisparo: {fileID: 1497743876}
@@ -503,6 +504,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -578,11 +580,11 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.61541224, y: -0, z: -0, w: 0.78820544}
-  m_LocalPosition: {x: 0, y: 8, z: -2}
+  m_LocalPosition: {x: 0, y: 9, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 532868227}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -660,6 +662,21 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b1c580d3b831f07b95c948cb1a9c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 532868227}
+  offset: {x: 0, y: 10, z: -5}
+  smoothTime: 0.125
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +981,6 @@ Transform:
   - {fileID: 986571228}
   - {fileID: 69410574}
   - {fileID: 1048491707}
-  - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &532868229
@@ -1107,6 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b55399bb7c9a31b8c4c24b2eff2bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSmoothTime: 0.1
   speed: 6
   rotationVelocity: 500
   lookAt: 2
@@ -2313,6 +2330,7 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1522510164}

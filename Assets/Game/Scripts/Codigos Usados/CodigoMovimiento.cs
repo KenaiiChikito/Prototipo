@@ -10,6 +10,12 @@ public enum MirarMouse
 
 public class CodigoMovimiento : MonoBehaviour
 {
+
+    //Funciones de camara para que este mas clean
+
+    public float rotationSmoothTime = 0.1f; // Tiempo para suavizar la rotación
+    private float currentRotationVelocity; // Velocidad actual de rotación (usada por SmoothDampAngle)
+    
     private Camera cam;
     //private Animator animator;
     private Rigidbody rb;
@@ -111,11 +117,11 @@ public class CodigoMovimiento : MonoBehaviour
             Vector3 lookDir = pointToLook - transform.position;
             lookDir.y = 0; // Evita que el cilindro se incline
 
-            if (lookDir.magnitude > 0.1f)
+            if (lookDir.magnitude > 0.5f) // Solo rota si el mouse está a una distancia mínima para evitar jitter
             {
                 Quaternion targetRotation = Quaternion.LookRotation(lookDir);
                 // Usamos la misma velocidad de rotación que definiste
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationVelocity * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
             }
         }
     }
