@@ -13,12 +13,9 @@ GameObject:
   - component: {fileID: 1783034658148468365}
   - component: {fileID: 99102565075310807}
   - component: {fileID: 8039635843791435621}
-  - component: {fileID: 4748043292516772540}
   - component: {fileID: 2304703065348012863}
-  - component: {fileID: 4635842951377630886}
   - component: {fileID: 9223073331782379287}
   - component: {fileID: 2372180153403491962}
-  - component: {fileID: 8263248958260594872}
   - component: {fileID: 7080027628666007225}
   - component: {fileID: 4065835162506480151}
   - component: {fileID: 1419032643137213198}
@@ -142,7 +139,7 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -153,19 +150,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 1
---- !u!114 &4748043292516772540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2226554530781250449}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cce11cad0d8f04873a8eae8d45ec58ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!114 &2304703065348012863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,21 +165,6 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   destroyedEffect: {fileID: 0}
---- !u!114 &4635842951377630886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2226554530781250449}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a79fc2fd84e8226aa54461a293e4685, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3642145139942393079, guid: 1f60b64d9ec8c2a3ca39885ffdf71b23, type: 3}
-  firePoint: {fileID: 1780801365568947008}
-  fireRate: 0.2
 --- !u!114 &9223073331782379287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,19 +204,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &8263248958260594872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2226554530781250449}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cce11cad0d8f04873a8eae8d45ec58ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!114 &7080027628666007225
 MonoBehaviour:
   m_ObjectHideFlags: 0
