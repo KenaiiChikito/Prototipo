@@ -9,7 +9,6 @@ public class Bullet : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        // La bala se destruye sola después de X segundos si no choca con nada
         if (photonView.IsMine)
         {
             Invoke("DestroyBullet", lifeTime);
@@ -23,17 +22,17 @@ public class Bullet : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
-        // Solo el dueño de la bala procesa el choque para evitar doble daño
         if (!photonView.IsMine) return;
 
         Health targetHealth = other.GetComponent<Health>();
-        if (targetHealth != null)
+
+        // Validamos que el objeto tenga el componente Health y cuente con un PhotonView para enviar el RPC
+        if (targetHealth != null && targetHealth.photonView != null)
         {
-            // Llamamos a la función de daño a través de la red (RPC)
             targetHealth.photonView.RPC("TakeDamage", RpcTarget.All, damage);
         }
 
-        // Si choca con cualquier cosa que no sea el disparador, se destruye
+        // Si choca con algo que no sea el jugador que la disparó, se destruye
         if (!other.CompareTag("Player") || (other.GetComponent<PhotonView>() && !other.GetComponent<PhotonView>().IsMine))
         {
             DestroyBullet();
