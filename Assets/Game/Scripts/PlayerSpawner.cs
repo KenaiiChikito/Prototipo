@@ -3,20 +3,30 @@ using Photon.Pun;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    public GameObject playerPrefab; // Arrastra aquí el prefab de tu jugador
+    
+    public GameObject playerPrefab;
+    public Transform[] spawnPoints; // Arrastra 4 GameObjects aquí en el Inspector
 
     void Start()
     {
         if (PhotonNetwork.IsConnected)
         {
-            // Simplemente instanciamos. No intentamos conectar ni unirnos a salas.
-            // El personaje aparece en una posición aleatoria para que no se encimen
-            Vector3 randomPos = new Vector3(Random.Range(-5f, 5f), 1f, Random.Range(-5f, 5f));
-            PhotonNetwork.Instantiate(playerPrefab.name, randomPos, Quaternion.identity);
+            // PhotonNetwork.LocalPlayer.ActorNumber nos da el orden de entrada (1, 2, 3 o 4)
+            // Restamos 1 para que sea (0, 1, 2, 3) y coincida con el Array
+            int index = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+
+            // Por si acaso entran más de los planeados, usamos el operador % (módulo)
+            int spawnIndex = index % spawnPoints.Length;
+
+            Transform selectedSpawn = spawnPoints[spawnIndex];
+
+            PhotonNetwork.Instantiate(playerPrefab.name, selectedSpawn.position, selectedSpawn.rotation);
         }
-        else
-        {
-            Debug.LogError("¡No estás conectado a Photon! Vuelve desde la escena de Menú.");
-        }
+        // Esto hará que en la Sala A el Player 1 salga en el sitio 0, 
+        // pero en la Sala B el Player 1 quizás salga en el sitio 2.
+        int roomSeed = PhotonNetwork.CurrentRoom.Name.GetHashCode();
+        Random.InitState(roomSeed); 
+        // (Esto es más avanzado, por ahora te recomiendo el sistema de ActorNumber fijo 
+        // para que pruebes que el multijugador funciona bien).
     }
 }

@@ -21,6 +21,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     public TextMeshProUGUI roomNameText;
     public GameObject startButton; // El botón de "Iniciar Partida"
     public TMPro.TMP_InputField nameInputField;
+    [Header("Room Browser")]
+    public GameObject roomItemPrefab;
+    public Transform roomListContent;
 
     void Awake()
     {
@@ -113,6 +116,24 @@ public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
         // Si el dueño se sale, el nuevo dueño recibe el botón de inicio
         UpdateStartButton();
     }
+    // Este método de Photon se activa solo cuando hay cambios en las salas
+public override void OnRoomListUpdate(System.Collections.Generic.List<Photon.Realtime.RoomInfo> roomList)
+{
+    // Limpiar lista vieja
+    foreach (Transform trans in roomListContent) {
+        Destroy(trans.gameObject);
+    }
+
+    // Crear un botón por cada sala abierta
+    foreach (var room in roomList)
+    {
+        // Si la sala está llena o cerrada, no la mostramos (opcional)
+        if (room.RemovedFromList) continue;
+
+        GameObject newItem = Instantiate(roomItemPrefab, roomListContent);
+        newItem.GetComponent<RoomItem>().SetRoomInfo(room);
+    }
+}
 
     // --- FUNCIONES DE BOTONES ---
 
