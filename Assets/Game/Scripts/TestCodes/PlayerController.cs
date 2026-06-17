@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.InRoom || !photonView.IsMine) return;
 
         RotateTowardsMouse();
     }

@@ -23,6 +23,7 @@ public class Dashing : MonoBehaviourPunCallbacks
     void Update()
     {
         // 1. Solo el dueño del personaje puede controlarlo
+        if (!PhotonNetwork.InRoom || !photonView.IsMine) return;
         if (photonView != null && !photonView.IsMine) return;
 
         // 2. Manejar el temporizador del Cooldown

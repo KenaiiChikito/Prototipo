@@ -11,7 +11,7 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     void Update()
     {
         // Solo yo puedo disparar con mi personaje
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.InRoom || !photonView.IsMine) return;
 
         // "Fire1" es el click izquierdo del mouse
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
