@@ -165,7 +165,7 @@ RectTransform:
   m_GameObject: {fileID: 5348504153606682576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.74562, y: 0.74562, z: 0.74562}
+  m_LocalScale: {x: 0.64019245, y: 0.64019245, z: 0.64019245}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2483550877766935978}
@@ -173,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -55.2}
+  m_AnchoredPosition: {x: 176, y: 19}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &634549919916321524
@@ -258,9 +258,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5348504153606682576}
         m_TargetAssemblyTypeName: Launcher, Assembly-CSharp
-        m_MethodName: SetNickname
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
