@@ -1,10 +1,12 @@
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections.Generic; // Asegúrate de tener esto arriba
 using TMPro; // Si usas TextMeshPro
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
+    private Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
     public static Launcher instance;
 
     [Header("Lobby Config")]
@@ -117,21 +119,31 @@ public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
         UpdateStartButton();
     }
     // Este método de Photon se activa solo cuando hay cambios en las salas
-public override void OnRoomListUpdate(System.Collections.Generic.List<Photon.Realtime.RoomInfo> roomList)
+public override void OnRoomListUpdate(List<RoomInfo> roomList)
 {
-    // Limpiar lista vieja
-    foreach (Transform trans in roomListContent) {
+    // 1. Actualizar nuestro diccionario interno con los cambios
+    foreach (RoomInfo info in roomList)
+    {
+        if (info.RemovedFromList)
+        {
+            cachedRoomList.Remove(info.Name);
+        }
+        else
+        {
+            cachedRoomList[info.Name] = info;
+        }
+    }
+
+    // 2. Ahora sí, limpiar la UI y dibujar lo que hay en el diccionario
+    foreach (Transform trans in roomListContent)
+    {
         Destroy(trans.gameObject);
     }
 
-    // Crear un botón por cada sala abierta
-    foreach (var room in roomList)
+    foreach (RoomInfo info in cachedRoomList.Values)
     {
-        // Si la sala está llena o cerrada, no la mostramos (opcional)
-        if (room.RemovedFromList) continue;
-
         GameObject newItem = Instantiate(roomItemPrefab, roomListContent);
-        newItem.GetComponent<RoomItem>().SetRoomInfo(room);
+        newItem.GetComponent<RoomItem>().SetRoomInfo(info);
     }
 }
 
