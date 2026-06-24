@@ -8,6 +8,8 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     public Transform firePoint;
     public float fireRate = 0.2f;
     private float nextFireTime;
+    public AudioClip fireSound;
+    public AudioSource fireSource;
 
     void Update()
     {
@@ -20,6 +22,8 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
         {
             nextFireTime = Time.time + fireRate;
             Shoot();
+            fireSource.clip = fireSound;
+            fireSource.Play();
         }
     }
 
