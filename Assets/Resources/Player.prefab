@@ -226,12 +226,12 @@ Transform:
   m_GameObject: {fileID: 2154695951892321238}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 96.42873, y: 0, z: 278.75476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5306942055251128392}
   - {fileID: 250535229459378632}
+  - {fileID: 5306942055251128392}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2650791839870407242
@@ -245,6 +245,8 @@ GameObject:
   - component: {fileID: 250535229459378632}
   - component: {fileID: 5984711124748535718}
   - component: {fileID: 1368375524014996012}
+  - component: {fileID: 3647674547140880440}
+  - component: {fileID: 2878217506397697855}
   m_Layer: 5
   m_Name: HealtCanvas
   m_TagString: Untagged
@@ -261,7 +263,7 @@ RectTransform:
   m_GameObject: {fileID: 2650791839870407242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.48699, y: 0.48699, z: 0.48699}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8683888781220366284}
@@ -269,7 +271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.044, y: 2.6}
+  m_AnchoredPosition: {x: 0, y: 2.6}
   m_SizeDelta: {x: 2, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5984711124748535718
@@ -316,8 +318,34 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
+  m_DynamicPixelsPerUnit: 10
   m_PresetInfoIsWorld: 1
+--- !u!114 &3647674547140880440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2650791839870407242}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c42ac26a27b744e9a35037b7015ce43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2878217506397697855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2650791839870407242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0f015fad0f0bbc6b60b20c0e9a084b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5306942055251128392}
+  offset: {x: 0, y: 2.5, z: -1}
 --- !u!1 &3110962139967967199
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -642,7 +670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
+  currentHealth: 100
+  healthSlider: {fileID: 4012319204171768000}
   destroyedEffect: {fileID: 0}
 --- !u!114 &8085423958654646177
 MonoBehaviour:
@@ -801,7 +830,7 @@ RectTransform:
   m_GameObject: {fileID: 5072461409688748067}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.012887152, y: 0.063441, z: 0.063441}
+  m_LocalScale: {x: 0.014027665, y: 0.063441, z: 0.063441}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4394083654051248242}
@@ -810,7 +839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.045, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4012319204171768000
@@ -1032,7 +1061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.13732743, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
