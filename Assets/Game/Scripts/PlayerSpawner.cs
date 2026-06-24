@@ -3,30 +3,40 @@ using Photon.Pun;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    
     public GameObject playerPrefab;
-    public Transform[] spawnPoints; // Arrastra 4 GameObjects aquí en el Inspector
+    public Transform[] spawnPoints; 
 
     void Start()
     {
         if (PhotonNetwork.IsConnected)
         {
-            // PhotonNetwork.LocalPlayer.ActorNumber nos da el orden de entrada (1, 2, 3 o 4)
-            // Restamos 1 para que sea (0, 1, 2, 3) y coincida con el Array
+            // 1. Lógica de selección de Spawn por número de jugador
             int index = PhotonNetwork.LocalPlayer.ActorNumber - 1;
-
-            // Por si acaso entran más de los planeados, usamos el operador % (módulo)
             int spawnIndex = index % spawnPoints.Length;
-
             Transform selectedSpawn = spawnPoints[spawnIndex];
 
-            PhotonNetwork.Instantiate(playerPrefab.name, selectedSpawn.position, selectedSpawn.rotation);
+            // 2. INSTANCIAR AL JUGADOR (Solo una vez)
+            // Guardamos el objeto creado en la variable 'myPlayer'
+            GameObject myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, selectedSpawn.position, selectedSpawn.rotation);
+
+            // 3. INTEGRACIÓN CON EL MINIMAPA
+            // Como acabamos de instanciarlo nosotros, IsMine siempre será true para este objeto
+            if (myPlayer.GetComponent<PhotonView>().IsMine)
+            {
+                // Buscamos el script MinimapFollow que creamos antes
+                // En Unity 6 se recomienda usar FindFirstObjectByType
+                MinimapFollow minimap = Object.FindFirstObjectByType<MinimapFollow>();
+                
+                if (minimap != null) 
+                {
+                    minimap.target = myPlayer.transform;
+                    Debug.Log("Minimapa configurado para seguir a: " + myPlayer.name);
+                }
+                else
+                {
+                    Debug.LogWarning("No se encontró el script MinimapFollow en la escena.");
+                }
+            }
         }
-        // Esto hará que en la Sala A el Player 1 salga en el sitio 0, 
-        // pero en la Sala B el Player 1 quizás salga en el sitio 2.
-        int roomSeed = PhotonNetwork.CurrentRoom.Name.GetHashCode();
-        Random.InitState(roomSeed); 
-        // (Esto es más avanzado, por ahora te recomiendo el sistema de ActorNumber fijo 
-        // para que pruebes que el multijugador funciona bien).
     }
 }

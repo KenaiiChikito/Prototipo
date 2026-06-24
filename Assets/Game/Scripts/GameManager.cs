@@ -5,21 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public GameObject winPanel;   // Panel de victoria
-    public GameObject pausePanel; // Panel de pausa
+    public GameObject winPanel;   
+    public GameObject pausePanel; 
     private bool isPaused = false;
+
+    void Start()
+    {
+        // Al iniciar la partida, ocultamos el mouse pero lo dejamos funcional
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None; 
+    }
 
     void Update()
     {
-        // Solo detectamos pausa si no hemos ganado ya (para no solapar menús)
         if (Input.GetKeyDown(KeyCode.Escape) && !winPanel.activeSelf)
         {
             TogglePause();
         }
-        
-    if (pausePanel.activeSelf) return; // No disparar si el menú está abierto
-    // ... resto del disparo
-
     }
 
     public void TogglePause()
@@ -27,22 +29,21 @@ public class GameManager : MonoBehaviourPunCallbacks
         isPaused = !isPaused;
         pausePanel.SetActive(isPaused);
 
-        // Liberar o bloquear el cursor según la pausa
         if (isPaused)
         {
-            Cursor.lockState = CursorLockMode.None;
+            // EN PAUSA: Mouse visible para clickear botones
             Cursor.visible = true;
-            // Opcional: Time.timeScale = 0; // Solo afectará a tus animaciones locales
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0f; // Opcional: frena el tiempo local
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            // JUGANDO: Mouse invisible pero NO bloqueado para que el Raycast funcione
             Cursor.visible = false;
-            // Opcional: Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.None; 
+            Time.timeScale = 1f;
         }
     }
-
-    // --- LÓGICA DE JUGADORES (Lo que ya teníamos) ---
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
@@ -54,20 +55,15 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void ShowWinUI()
     {
-        // Si estábamos en pausa, la cerramos para mostrar la victoria
         pausePanel.SetActive(false);
-        
         winPanel.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
-
-    // --- BOTONES (Compartidos por ambos paneles) ---
 
     public void OnClick_Leave()
     {
-        // Aseguramos que el tiempo vuelva a la normalidad antes de salir
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
         PhotonNetwork.LeaveRoom();
     }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
@@ -14,22 +15,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if (photonView.IsMine)
         {
-            // EL MÍO: Usa física, no es kinematic
             rb.isKinematic = false;
-
-            if (CameraFollow.instance != null)
-            {
-                CameraFollow.instance.SetTarget(this.transform);
-            }
-            else
-            {
-                Debug.LogWarning("No se encontró el script CameraFollow en la escena. Asegúrate de que la cámara tenga el script.");
-            }
-
+            if (CameraFollow.instance != null) CameraFollow.instance.SetTarget(this.transform);
+            
+            // Mouse invisible pero funcional para el Raycast
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
-            // LOS DEMÁS: No usan física localmente
             rb.isKinematic = true;
         }
     }
@@ -38,10 +32,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.InRoom || !photonView.IsMine) return;
 
+        // Si el mouse está sobre la pausa o botones, no rotar
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         RotateTowardsMouse();
     }
 
-    void FixedUpdate() // El movimiento físico es mejor en FixedUpdate
+    void FixedUpdate()
     {
         if (!photonView.IsMine) return;
         Move();
@@ -49,15 +46,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void Move()
     {
+        // Movimiento en ejes globales (W = Arriba, S = Abajo, A = Izquierda, D = Derecha)
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
 
         Vector3 moveDirection = new Vector3(moveX, 0f, moveZ).normalized;
         
-        // Solo aplicamos velocidad si NO es kinematic (evita el error de la consola)
         if (!rb.isKinematic)
         {
-            rb.linearVelocity = moveDirection * moveSpeed;
+            // Aplicamos velocidad manteniendo la gravedad (linearVelocity.y)
+            rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, rb.linearVelocity.y, moveDirection.z * moveSpeed);
         }
     }
 
@@ -74,8 +72,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
             if (direction.magnitude > 0.1f)
             {
+                // El personaje gira hacia el punto del impacto del mouse
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 15f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
             }
         }
     }
