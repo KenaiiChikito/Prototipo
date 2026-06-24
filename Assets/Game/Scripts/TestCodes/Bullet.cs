@@ -23,6 +23,26 @@ public class Bullet : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
+{
+    if (!photonView.IsMine) return;
+
+    // 1. Si le pega a un Jugador
+    Health playerHealth = other.GetComponent<Health>();
+    if (playerHealth != null)
+    {
+        playerHealth.photonView.RPC("TakeDamage", RpcTarget.All, damage);
+    }
+
+    // 2. Si le pega a una Muralla
+    WallHealth wall = other.GetComponent<WallHealth>();
+    if (wall != null)
+    {
+        wall.photonView.RPC("TakeWallDamage", RpcTarget.All, damage);
+    }
+
+    // Destruir la bala siempre que toque algo sólido
+    DestroyBullet();
+}
         // Solo el dueño de la bala procesa el choque para evitar doble daño
         if (!photonView.IsMine) return;
 
@@ -39,9 +59,11 @@ public class Bullet : MonoBehaviourPunCallbacks
             DestroyBullet();
         }
     }
+    
 
     void DestroyBullet()
     {
         PhotonNetwork.Destroy(gameObject);
     }
+    
 }

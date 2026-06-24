@@ -76,4 +76,27 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Application.Quit();
     }
+    [PunRPC]
+public void RPC_CheckPlayers()
+{
+    // Le damos un pequeño tiempo para que Photon borre al jugador destruido
+    Invoke("CheckCount", 0.2f);
+}
+
+void CheckCount()
+{
+    // Buscamos a todos los que tengan el Tag "Player"
+    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+    Debug.Log("Jugadores restantes: " + players.Length);
+
+    // Si solo queda uno y ese soy yo, gano
+    if (players.Length == 1)
+    {
+        if (players[0].GetComponent<PhotonView>().IsMine)
+        {
+            ShowWinUI();
+        }
+    }
+}
 }

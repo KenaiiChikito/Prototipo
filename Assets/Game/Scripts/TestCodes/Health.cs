@@ -41,15 +41,14 @@ public class Health : MonoBehaviourPunCallbacks
     }
 
     void Die()
+{
+    if (photonView.IsMine)
     {
-        if (destroyedEffect != null)
-        {
-            Instantiate(destroyedEffect, transform.position, transform.rotation);
-        }
-
-        if (photonView.IsMine)
-        {
-            PhotonNetwork.Destroy(gameObject);
-        }
+        // Llamamos al RPC del GameManager antes de destruirnos
+        // Asegúrate de que el objeto GameManager de tu escena tenga un PhotonView
+        FindObjectOfType<GameManager>().photonView.RPC("RPC_CheckPlayers", RpcTarget.All);
+        
+        PhotonNetwork.Destroy(gameObject);
     }
+}
 }
