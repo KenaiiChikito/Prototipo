@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c1a7dc31a21a2ce4b87f2999f998ba33, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -823,7 +823,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 499216684}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Murallas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -840,7 +840,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1615068137}
@@ -861,7 +861,7 @@ GameObject:
   - component: {fileID: 514581097}
   - component: {fileID: 514581096}
   - component: {fileID: 514581095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Limites (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2426,7 +2426,7 @@ GameObject:
   - component: {fileID: 1615068140}
   - component: {fileID: 1615068139}
   - component: {fileID: 1615068138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Limites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2987,7 +2987,7 @@ GameObject:
   - component: {fileID: 1990038589}
   - component: {fileID: 1990038588}
   - component: {fileID: 1990038587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Limites (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3367,7 +3367,7 @@ GameObject:
   - component: {fileID: 2047817603}
   - component: {fileID: 2047817602}
   - component: {fileID: 2047817601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Limites (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
