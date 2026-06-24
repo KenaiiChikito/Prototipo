@@ -88,14 +88,6 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Pierna.L
-      humanName: LeftUpperLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
     - boneName: Pierna.R
       humanName: RightUpperLeg
       limit:
@@ -104,24 +96,8 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Rodilla.L
-      humanName: LeftLowerLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
     - boneName: Rodilla.R
       humanName: RightLowerLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Pie.L
-      humanName: LeftFoot
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -152,6 +128,46 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
+    - boneName: Pecho
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hombro.R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Brazo.R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Codo.R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Mano.R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
     - boneName: Cuello
       humanName: Neck
       limit:
@@ -176,24 +192,8 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Hombro.R
-      humanName: RightShoulder
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
     - boneName: Brazo.L
       humanName: LeftUpperArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Brazo.R
-      humanName: RightUpperArm
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -208,14 +208,6 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Codo.R
-      humanName: RightLowerArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
     - boneName: Mano.L
       humanName: LeftHand
       limit:
@@ -224,8 +216,24 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Mano.R
-      humanName: RightHand
+    - boneName: Pierna.L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rodilla.L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Pie.L
+      humanName: LeftFoot
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -456,14 +464,6 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Pecho
-      humanName: UpperChest
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
     skeleton:
     - name: Jacob_V3(Clone)
       parentName: 
@@ -548,7 +548,7 @@ ModelImporter:
     - name: Anular_inferior.L
       parentName: Mano.L
       position: {x: -0.035831675, y: 0.2250353, z: -0.02026028}
-      rotation: {x: -0.008276267, y: -0.00012539543, z: 0.01585298, w: 0.9998401}
+      rotation: {x: -0.008276266, y: -0.00012539543, z: 0.015852978, w: 0.9998401}
       scale: {x: 0.99999994, y: 1, z: 0.99999994}
     - name: Anular_medio.L
       parentName: Anular_inferior.L
@@ -633,7 +633,7 @@ ModelImporter:
     - name: Brazo.R
       parentName: Hombro.R
       position: {x: -0.010552124, y: -0.0461179, z: 0.13556471}
-      rotation: {x: 0.7301413, y: 0.009090636, z: -0.00706823, w: 0.6831992}
+      rotation: {x: 0.7301412, y: 0.009090636, z: -0.0070682294, w: 0.6831992}
       scale: {x: 0.99999994, y: 1, z: 0.9999998}
     - name: Codo.R
       parentName: Brazo.R
@@ -648,7 +648,7 @@ ModelImporter:
     - name: Anular_inferior.R
       parentName: Mano.R
       position: {x: 0.03583167, y: 0.22503524, z: -0.020260226}
-      rotation: {x: -0.008276259, y: 0.00012542387, z: -0.015852982, w: 0.9998401}
+      rotation: {x: -0.008276258, y: 0.00012542387, z: -0.01585298, w: 0.9998401}
       scale: {x: 0.9999999, y: 1, z: 0.99999994}
     - name: Anular_medio.R
       parentName: Anular_inferior.R
@@ -728,7 +728,7 @@ ModelImporter:
     - name: Pierna.L
       parentName: Culo
       position: {x: 0.000000015040113, y: 0.088480905, z: -0.17203884}
-      rotation: {x: 0.70544183, y: -0.02930462, z: 0.70805675, w: -0.012199411}
+      rotation: {x: 0.70544183, y: -0.029304624, z: 0.70805675, w: -0.012199413}
       scale: {x: 1.0000015, y: 1.0000007, z: 1.0000097}
     - name: Rodilla.L
       parentName: Pierna.L
@@ -808,7 +808,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  autoGenerateAvatarMappingIfUnspecified: 1
+  autoGenerateAvatarMappingIfUnspecified: 0
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 1
