@@ -1,5 +1,6 @@
-using UnityEngine;
+using Mono.Cecil;
 using Photon.Pun;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviourPunCallbacks
@@ -7,11 +8,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public float moveSpeed = 5f;
     private Rigidbody rb;
     private Camera cam;
+    public Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         cam = Camera.main;
+        animator = GetComponentInChildren<Animator>();
 
         if (photonView.IsMine)
         {
@@ -36,6 +39,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
         RotateTowardsMouse();
+
+        bool isWalking = (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0);
+        animator.SetBool("Walk", isWalking);
+
     }
 
     void FixedUpdate()

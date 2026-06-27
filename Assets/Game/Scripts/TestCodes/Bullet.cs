@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     public float damage = 10f;
     public float lifeTime = 2f;
 
+
     void Start()
     {
         // La bala se destruye sola después de X segundos si no choca con nada
