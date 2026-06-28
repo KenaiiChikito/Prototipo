@@ -1,6 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviourPunCallbacks
 {
@@ -10,7 +11,12 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     private float nextFireTime;
     public AudioClip fireSound;
     public AudioSource fireSource;
+    public Animator animator;
 
+    private void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
     void Update()
     {
         if (!PhotonNetwork.InRoom || !photonView.IsMine) return;
@@ -30,7 +36,7 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     void Shoot()
     {
         if (bulletPrefab == null || firePoint == null) return;
-
+        animator.SetTrigger("Fire");
         // Instanciamos la bala con la posición y rotación del FirePoint.
         // Como el FirePoint es hijo del jugador, siempre mirará a donde mira el jugador.
         PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation);
