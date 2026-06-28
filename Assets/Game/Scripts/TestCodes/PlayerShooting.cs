@@ -12,6 +12,8 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     public AudioClip fireSound;
     public AudioSource fireSource;
     public Animator animator;
+    public GameObject ChucleKnot;
+
 
     private void Start()
     {
@@ -37,6 +39,7 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     {
         if (bulletPrefab == null || firePoint == null) return;
         animator.SetTrigger("Fire");
+        ChucleKnot.SetActive(true);
         // Instanciamos la bala con la posición y rotación del FirePoint.
         // Como el FirePoint es hijo del jugador, siempre mirará a donde mira el jugador.
         PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation);
