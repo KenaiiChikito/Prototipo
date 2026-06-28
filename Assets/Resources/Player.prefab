@@ -112,7 +112,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.96609235, g: 1, b: 0, a: 1}
-  m_Intensity: 5
+  m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -634,6 +634,7 @@ MonoBehaviour:
   fireSource: {fileID: 28504277988000181}
   animator: {fileID: 6138286351583387236}
   ChucleKnot: {fileID: 1735579832463267534}
+  Tiempo: 0.2
 --- !u!114 &1459253922438528604
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     public AudioSource fireSource;
     public Animator animator;
     public GameObject ChucleKnot;
+    [SerializeField] private float Tiempo = 0.2f;
 
 
     private void Start()
@@ -32,6 +33,8 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
             Shoot();
             fireSource.clip = fireSound;
             fireSource.Play();
+            ChucleKnot.SetActive(true);
+            Invoke("Apagar", Tiempo);
         }
     }
 
@@ -39,9 +42,13 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     {
         if (bulletPrefab == null || firePoint == null) return;
         animator.SetTrigger("Fire");
-        ChucleKnot.SetActive(true);
+
         // Instanciamos la bala con la posición y rotación del FirePoint.
         // Como el FirePoint es hijo del jugador, siempre mirará a donde mira el jugador.
         PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation);
+    }
+    void Apagar()
+    {
+        ChucleKnot.SetActive(false);
     }
 }
