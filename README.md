@@ -1,8 +1,7 @@
 # ⚙️ Rusted Steam Gear
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Engine: Unity]([suspicious link removed])](https://unity.com/)
-[![Networking: Photon PUN2]([suspicious link removed])](https://www.photonengine.com/pun)
+[![Networking: Photon PUN2]([https://www.photonengine.com/pun](https://assetstore.unity.com/packages/tools/network/pun-2-free-119922))
 
 **Rusted Steam Gear** es un prototipo de videojuego multijugador *Top-Down Shooter* ambientado en un universo *Steampunk*, desarrollado como proyecto universitario. El juego implementa la arquitectura de red **Photon PUN2** para ofrecer partidas estilo *Battle Royale* en red local u online para hasta 4 jugadores en una misma build, donde el último jugador en pie es coronado como el "Campeón del Yermo".
 
@@ -60,7 +59,7 @@ Este proyecto fue desarrollado colaborativamente por:
   - Integración y arquitectura de red con Photon PUN2 (conexión de lobby, creación de salas y sincronización multijugador entre equipos).
   - Programación de gameplay: sistema de movimiento, esquiva (*dash*), salud/daño, mecánicas de disparo y jugabilidad general.
 
-* **KokersArts**
+* **KokersArts ([@KokearArts](https://github.com/kokerarts))**
   - Diseño y modelado 3D del escenario jugable, personaje principal, accesorios y armamento.
   - Creación de animaciones, efectos visuales (VFX) y efectos de sonido (SFX).
 
